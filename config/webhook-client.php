@@ -1,6 +1,7 @@
 <?php
 
 use App\Jobs\ProcessWebhookJob;
+use App\Webhooks\DefaultSignatureValidator;
 
 return [
     'configs' => [
@@ -25,9 +26,9 @@ return [
 //            /*
 //             *  This class will verify that the content of the signature header is valid.
 //             *
-//             * It should implement \Spatie\WebhookClient\SignatureValidator\SignatureValidator
+//             * It should implement SignatureValidator
 //             */
-//            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+//            'signature_validator' => DefaultSignatureValidator::class,
 //
 //            /*
 //             * This class determines if the webhook call should be stored and processed.
@@ -64,9 +65,9 @@ return [
 //        ],
         [
             'name' => 'eda_prod_php_fpm',
-            'signing_secret' => env('GITHUB_WEBHOOK_SECRET_MY_APP'),
+            'signing_secret' => config('app.key'),
             'signature_header_name' => 'X-Hub-Signature-256',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
@@ -75,9 +76,9 @@ return [
         ],
         [
             'name' => 'eda_prod_caddy',
-            'signing_secret' => env('GITHUB_WEBHOOK_SECRET_MY_APP'),
+            'signing_secret' => config('app.key'),
             'signature_header_name' => 'X-Hub-Signature-256',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
             'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/f3b1cd2b-a31d-47b7-a114-1ce09584e5a6',
@@ -85,9 +86,9 @@ return [
         ],
         [
             'name' => 'eda_staging_php_fpm',
-            'signing_secret' => env('GITHUB_WEBHOOK_SECRET_MY_APP'),
+            'signing_secret' => config('app.key'),
             'signature_header_name' => 'X-Hub-Signature-256',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
@@ -96,16 +97,15 @@ return [
         ],
         [
             'name' => 'eda_staging_caddy',
-            'signing_secret' => env('GITHUB_WEBHOOK_SECRET_MY_APP'),
+            'signing_secret' => config('app.key'),
             'signature_header_name' => 'X-Hub-Signature-256',
-            'signature_validator' => \Spatie\WebhookClient\SignatureValidator\DefaultSignatureValidator::class,
+            'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
             'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/bc7533db-b195-4921-af3c-af4a0307fee6',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         // If you want to add more configs, just copy the above and change the name and signing_secret
-        // don't forget to add the route in routes/webhooks.php
     ],
 
     /*
