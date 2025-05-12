@@ -1,0 +1,36 @@
+---
+version: "3.9"
+
+services:
+  laravel:
+    image: php:8.4-cli
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    networks:
+      - traefik-public
+      - wesh
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik-public"
+        - "traefik.http.routers.wesh.service=wesh"
+        - "traefik.http.routers.wesh.rule=Host(`wesh.tools.iad-arts.be`)"
+        - "traefik.http.routers.wesh.entrypoints=websecure"
+        - "traefik.http.services.wesh.loadbalancer.server.port=8000"
+        - "traefik.http.routers.wesh.tls.certresolver=staging"
+        - "traefik.http.routers.wesh.tls=true"
+
+networks:
+  wesh:
+    driver: overlay
+    attachable: true
+  traefik-public:
+    external: true
