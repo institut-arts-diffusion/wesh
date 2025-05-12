@@ -9,7 +9,6 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Spatie\WebhookClient\Models\WebhookCall;
 use Throwable;
 
 class ProcessWebhookJob extends \Spatie\WebhookClient\Jobs\ProcessWebhookJob
@@ -18,19 +17,18 @@ class ProcessWebhookJob extends \Spatie\WebhookClient\Jobs\ProcessWebhookJob
 
     public function handle(): void
     {
-        Log::info('ProcessPortainerWebhookJob started.', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $this->webhookCall->name]);
+        Log::info('ProcessWebhookJob started.', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $this->webhookCall->name]);
 
         $configName = $this->webhookCall->name;
         $config = $this->webhookClientConfig($configName);
 
-        Log::info('ProcessPortainerWebhookJob started.', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $configName]);
+        Log::info('ProcessWebhookJob started.', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $configName]);
 
-        // 1. Récupérer les détails du relais depuis la configuration
-        $portainerUrl = Arr::get($config, 'webhook_portainer_url');
+        $destinationWebhookUrl = Arr::get($config, 'webhook_destination_url');
 
-        if (!$portainerUrl) {
-            Log::error('Portainer URL missing in configuration: ', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $configName]);
-            $this->fail(new \Exception('Portainer URL missing for config ' . $configName));
+        if (!$destinationWebhookUrl) {
+            Log::error('Destination URL missing in configuration: ', ['webhook_call_id' => $this->webhookCall->id, 'config_name' => $configName]);
+            $this->fail(new \Exception('Destination URL missing for config ' . $configName));
             return;
         }
 
@@ -38,25 +36,25 @@ class ProcessWebhookJob extends \Spatie\WebhookClient\Jobs\ProcessWebhookJob
             Log::info('Calling Portainer webhook.', [
                 'webhook_call_id' => $this->webhookCall->id,
                 'config_name' => $configName,
-                'portainer_url_masked' => substr($portainerUrl, 0, strrpos($portainerUrl, '/')) . '/*****', // Masquer le token
+                'destination_url_masked' => substr($destinationWebhookUrl, 0, strrpos($destinationWebhookUrl, '/')) . '/*****',
             ]);
 
             $response = Http::timeout(20)
                         ->retry(2, 500)
-                        ->post($portainerUrl);
+                        ->post($destinationWebhookUrl);
 
             if ($response->successful()) {
                 Log::info('Webhook successfully called', [
                     'webhook_call_id' => $this->webhookCall->id,
                     'config_name' => $configName,
-                    'portainer_status' => $response->status(),
+                    'destination_status' => $response->status(),
                 ]);
             } else {
                 Log::error('Failed to call webhook', [
                     'webhook_call_id' => $this->webhookCall->id,
                     'config_name' => $configName,
-                    'portainer_status' => $response->status(),
-                    'portainer_response' => $response->body(),
+                    'destination_status' => $response->status(),
+                    'destination_response' => $response->body(),
                 ]);
 
                 $this->fail(new \Exception('Webhook returned error: ' . $response->status()));
@@ -84,9 +82,9 @@ class ProcessWebhookJob extends \Spatie\WebhookClient\Jobs\ProcessWebhookJob
 
     public function failed(Throwable $exception): void
     {
-        $configName = Arr::get($this->webhookClientConfig($this->webhookCall->name), 'name', 'inconnu');
-        Log::error('Le job ProcessPortainerWebhookJob a échoué.', [
-            'webhook_call_id' => (string)$this->webhookCall->id ?? 'N/A',
+        $configName = Arr::get($this->webhookClientConfig($this->webhookCall->name), 'name', 'unknown');
+        Log::error('ProcessWebhookJob failed.', [
+            'webhook_call_id' => $this->webhookCall->id ?? null,
             'config_name' => $configName,
             'exception_message' => $exception->getMessage(),
         ]);
