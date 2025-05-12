@@ -3,11 +3,7 @@ version: "3.9"
 
 services:
   laravel:
-    image: php:8.4-cli
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-    command: php artisan serve --host=0.0.0.0 --port=8000
+    image: ghcr.io/pvledoux/wesh_php_fpm_prod:latest
     networks:
       - traefik-public
       - wesh
@@ -28,7 +24,7 @@ services:
         - "traefik.http.routers.wesh.rule=Host(`wesh.tools.iad-arts.be`)"
         - "traefik.http.routers.wesh.entrypoints=websecure"
         - "traefik.http.services.wesh.loadbalancer.server.port=8000"
-        - "traefik.http.routers.wesh.tls.certresolver=staging"
+        - "traefik.http.routers.wesh.tls.certresolver=production"
         - "traefik.http.routers.wesh.tls=true"
 
 networks:
