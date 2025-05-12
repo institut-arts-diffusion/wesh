@@ -105,6 +105,16 @@ return [
             'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/bc7533db-b195-4921-af3c-af4a0307fee6',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
+        [
+            'name' => 'wesh',
+            'signing_secret' => config('app.key'),
+            'signature_header_name' => 'X-Hub-Signature-256',
+            'signature_validator' => DefaultSignatureValidator::class,
+            'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
+            'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/b7eb5c23-25a0-4aba-8063-e76da7b0f73c',
+            'process_webhook_job' => ProcessWebhookJob::class,
+        ],
         // If you want to add more configs, just copy the above and change the name and signing_secret
     ],
 
