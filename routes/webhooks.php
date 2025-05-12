@@ -7,6 +7,6 @@ foreach (config('webhook-client.configs') as $config) {
     $configName = $config['name'] ?? null;
 
     if ($configName) {
-        Route::webhooks($configName, $configName);
+        Route::webhooks($configName.'/{signature?}', $configName);
     }
 }
