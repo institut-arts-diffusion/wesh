@@ -113,7 +113,7 @@ return [
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/75c2d549-6e84-449a-9077-97a014d109e7',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/4b679548-b972-488e-9f5f-d540f95d0d2a',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
@@ -123,7 +123,7 @@ return [
             'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/bc7533db-b195-4921-af3c-af4a0307fee6',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/5d001eb6-827a-409a-b18e-293ce0a059aa',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
