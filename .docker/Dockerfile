@@ -24,7 +24,7 @@ WORKDIR /var/www/html
 
 COPY --from=vendor /var/www/html /var/www/html
 RUN touch /var/www/html/database/database.sqlite
-RUN php artisan migrate --force && php artisan storage:link && php artisan optimize
+RUN php artisan migrate --force && php artisan storage:link
 
 # Configure non-root user.
 ARG UNAME=www-data
@@ -38,6 +38,7 @@ RUN chown www-data:www-data  -R /var/www/html/storage && \
     chown www-data:www-data  -R /var/www/html/bootstrap/cache && \
     chown www-data:www-data  -R /var/www/html/resources
 
+COMMAND ["php-fpm"]
 ENTRYPOINT ["php", "/var/www/html/artisan", "serve", "--host=0.0.0.0", "--port=8000"]
 
 EXPOSE 8000
