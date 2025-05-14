@@ -24,7 +24,7 @@ WORKDIR /var/www/html
 
 COPY --from=vendor /var/www/html /var/www/html
 RUN touch /var/www/html/database/database.sqlite
-RUN php artisan migrate --force && php artisan storage:link && php artisan optimize
+RUN php artisan migrate --force && php artisan storage:link
 
 # Configure non-root user.
 ARG UNAME=www-data
