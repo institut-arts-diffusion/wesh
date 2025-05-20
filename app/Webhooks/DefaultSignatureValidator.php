@@ -16,12 +16,7 @@ class DefaultSignatureValidator implements SignatureValidator
      */
     public function isValid(Request $request, WebhookConfig $config): bool
     {
-        $signature = $request->header($config->signatureHeaderName);
-
-        if (! $signature) {
-            // Try to get the signature from the url last segment
-            $signature = $request->route('signature');
-        }
+        $signature = $request->route('signature');
 
         if (! $signature) {
             return false;
