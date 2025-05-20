@@ -33,10 +33,6 @@ class DefaultSignatureValidator implements SignatureValidator
             throw InvalidConfig::signingSecretNotSet();
         }
 
-//        $computedSignature = hash_hmac('sha256', $request->getContent(), $signingSecret);
-//
-//        return hash_equals($computedSignature, $signature);
-
-        return $signature === $signingSecret;
+        return $signature === hash_hmac('sha256', '', $signingSecret);
     }
 }
