@@ -144,7 +144,7 @@ return [
             'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/8bce7579-a0db-41a0-a236-1de6392aa275',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/a1befd79-1ed3-4c56-94dd-e649d62d9dce',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
