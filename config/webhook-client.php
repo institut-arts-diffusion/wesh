@@ -134,7 +134,7 @@ return [
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/1c231497-2c48-45b0-b398-26fcf909f583',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/08a41e42-36f4-4182-856f-b4bf28b05a59',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
