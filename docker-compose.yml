@@ -3,7 +3,7 @@ version: "3.9"
 
 services:
   laravel:
-    image: ghcr.io/pvledoux/wesh_php_fpm_prod:latest
+    image: ghcr.io/institut-arts-diffusion/wesh_php_fpm_prod:latest
     networks:
       - traefik-public
       - wesh
