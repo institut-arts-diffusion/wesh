@@ -92,7 +92,7 @@ return [
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/75c2d549-6e84-449a-9077-97a014d109e7',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/08a41e42-36f4-4182-856f-b4bf28b05a59',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
@@ -102,7 +102,7 @@ return [
             'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/bc7533db-b195-4921-af3c-af4a0307fee6',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/a1befd79-1ed3-4c56-94dd-e649d62d9dce',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
@@ -134,7 +134,7 @@ return [
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_response' => \Spatie\WebhookClient\WebhookResponse\DefaultRespondsTo::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/08a41e42-36f4-4182-856f-b4bf28b05a59',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/1c231497-2c48-45b0-b398-26fcf909f583',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
@@ -144,7 +144,7 @@ return [
             'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/a1befd79-1ed3-4c56-94dd-e649d62d9dce',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/8bce7579-a0db-41a0-a236-1de6392aa275',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         [
@@ -154,7 +154,7 @@ return [
             'signature_validator' => DefaultSignatureValidator::class,
             'webhook_profile' => \Spatie\WebhookClient\WebhookProfile\ProcessEverythingWebhookProfile::class,
             'webhook_model' => \Spatie\WebhookClient\Models\WebhookCall::class,
-            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/b7eb5c23-25a0-4aba-8063-e76da7b0f73c',
+            'webhook_destination_url' => 'https://portainer.lan.iad-arts.be/api/webhooks/a0aca3ed-6235-492c-9d20-4c938a49deb4',
             'process_webhook_job' => ProcessWebhookJob::class,
         ],
         // If you want to add more configs, just copy the above and change the name and signing_secret
